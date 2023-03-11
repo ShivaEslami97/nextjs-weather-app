@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Image from "next/image";
 import weatherIcon from "@/public/weather-icon.png";
 import emailIcon from "@/public/email_envelope_mail_send_icon.svg";
@@ -14,6 +13,31 @@ export default function Home() {
             <Image className="app-logo" src={weatherIcon} alt="weather icon" />
             <h3>Welcome!</h3>
           </div>
+          <form className="login__form">
+            <div className="login__input-container">
+              <Image width={25} height={25} src={emailIcon} alt="email icon" />
+              <input
+                type="email"
+                className="login__input"
+                placeholder="Please enter your email ..."
+              />
+            </div>
+            <div className="login__input-container">
+              <Image width={25} height={25} src={lockIcon} alt="lock icon" />
+              <input
+                type="email"
+                className="login__input"
+                placeholder="Please enter your password"
+              />
+            </div>
+            <button className="login__btn">Login</button>
+            <div className="login__register">
+              Dont you have an account?
+              <a className="text-primary ml-2" href="#">
+                Sign Up
+              </a>
+            </div>
+          </form>
         </div>
       </Layout>
     </>

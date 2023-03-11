@@ -19,4 +19,19 @@
   .app-logo {
     @apply w-36;
   }
+  .login__form {
+    @apply w-3/4 flex flex-col gap-6;
+  }
+  .login__input-container {
+    @apply grid gap-2 grid-cols-[25px_1fr] items-center border rounded-sm pl-2 py-2;
+  }
+  .login__input {
+    @apply border-none bg-transparent focus:outline-none;
+  }
+  .login__btn {
+    @apply bg-primary text-black font-semibold rounded border-none p-2 w-full;
+  }
+  .login__register {
+    @apply text-sm mx-auto;
+  }
 }
