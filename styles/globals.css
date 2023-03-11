@@ -2,3 +2,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "Poppins", sans-serif;
+  }
+}
+
+@layer components {
+  .main {
+    @apply bg-main h-screen relative flex items-center bg-cover before:content-[''] before:bg-filter before:absolute before:bg-cover before:h-full before:w-full;
+  }
+}
