@@ -34,4 +34,7 @@
   .login__register {
     @apply text-sm mx-auto;
   }
+  .weather__temp {
+    @apply text-4xl;
+  }
 }
