@@ -14,27 +14,30 @@
     @apply bg-main h-screen relative flex items-center bg-cover before:content-[''] before:bg-filter before:absolute before:bg-cover before:h-full before:w-full;
   }
   .main__box {
-    @apply flex flex-col gap-4 mx-auto max-w-xl bg-box shadow py-7 border-gray backdrop-blur-4xl px-5 rounded-sm justify-center items-center z-10 text-white relative;
+    @apply flex flex-col gap-6 mx-auto max-w-[33rem] bg-box shadow py-7 border border-solid border-gray backdrop-blur-4xl px-5 rounded-sm justify-center items-center z-10 text-white relative;
   }
   .app-logo {
     @apply w-36;
   }
-  .login__form {
+  .auth__form {
     @apply w-3/4 flex flex-col gap-6;
   }
-  .login__input-container {
+  .auth__input-container {
     @apply grid gap-2 grid-cols-[25px_1fr] items-center border rounded-sm pl-2 py-2;
   }
-  .login__input {
+  .auth__input {
     @apply border-none bg-transparent focus:outline-none;
   }
-  .login__btn {
+  .auth__btn {
     @apply bg-primary text-black font-semibold rounded border-none p-2 w-full;
   }
-  .login__register {
+  .auth__mode {
     @apply text-sm mx-auto;
   }
   .weather__temp {
     @apply text-4xl;
+  }
+  .weather__bg {
+    @apply absolute right-0 mix-blend-soft-light h-full w-full;
   }
 }
