@@ -14,7 +14,7 @@
     @apply bg-main h-screen relative flex items-center bg-cover before:content-[''] before:bg-filter before:absolute before:bg-cover before:h-full before:w-full;
   }
   .main__box {
-    @apply flex flex-col gap-4 mx-auto max-w-xl w-5/6 bg-box shadow py-7 border-gray backdrop-blur-4xl px-5 rounded-sm justify-center items-center z-10 text-white relative;
+    @apply flex flex-col gap-4 mx-auto max-w-xl bg-box shadow py-7 border-gray backdrop-blur-4xl px-5 rounded-sm justify-center items-center z-10 text-white relative;
   }
   .app-logo {
     @apply w-36;
