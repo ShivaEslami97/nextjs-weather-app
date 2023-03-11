@@ -10,13 +10,14 @@ module.exports = {
       backgroundImage: {
         main: "url('../public/clouds-bg.svg')",
         filter: "url(../public/Rectangle.svg)",
+        elgoli: "url(../public/elgoli.svg)",
       },
       backgroundColor: {
         box: "rgba(255, 255, 255, 0.1)",
       },
       colors: {
         primary: "#EDBA4F",
-        gray: "1px solid rgba(255, 255, 255, 0.2)",
+        gray: "rgba(255, 255, 255, 0.2)",
       },
       backdropBlur: {
         "4xl": "100px",
