@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { forwardRef, ReactNode } from "react";
+import { forwardRef } from "react";
 
 type Props = {
   className?: string;
