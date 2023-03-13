@@ -43,4 +43,23 @@ const Weather: NextPage = (): JSX.Element => {
   );
 };
 
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getSession(context);
+  console.log(session);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/unauthenticated",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {
+      session,
+    },
+  };
+};
+
 export default Weather;
