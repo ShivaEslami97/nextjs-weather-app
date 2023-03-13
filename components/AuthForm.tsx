@@ -31,7 +31,6 @@ const AuthForm = () => {
   const confirmPassInputRef = useRef<HTMLInputElement>(null);
   const [isLogin, setIslogin] = useState<boolean>(true);
   const router = useRouter();
-  const { data: session } = useSession();
 
   const authModeHandler = () => {
     setIslogin((prevIsLogin) => !prevIsLogin);
@@ -61,7 +60,11 @@ const AuthForm = () => {
       }
       try {
         const response: RegisterResponse = await registerUser(userData);
-        router.push("/weather");
+        toast.success(
+          "Registeration was successful! You can login with your info!"
+        );
+        setIslogin(true);
+        // router.push("/weather");
       } catch (error) {
         let msg = (error as Error).message;
         toast.error(msg);
