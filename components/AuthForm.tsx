@@ -31,6 +31,7 @@ const AuthForm = () => {
   const confirmPassInputRef = useRef<HTMLInputElement>(null);
   const [isLogin, setIslogin] = useState<boolean>(true);
   const router = useRouter();
+  const { data: session } = useSession();
 
   const authModeHandler = () => {
     setIslogin((prevIsLogin) => !prevIsLogin);
@@ -63,6 +64,20 @@ const AuthForm = () => {
         router.push("/weather");
       } catch (error) {
         let msg = (error as Error).message;
+        toast.error(msg);
+      }
+    } else {
+      const result = await signIn("credentials", {
+        redirect: false,
+        enteredEmail,
+        enteredPassword,
+      });
+      if (!result?.error) {
+        // set some auth state
+        router.replace("/weather");
+      }
+      if (result?.error) {
+        let msg = result?.error;
         toast.error(msg);
       }
     }
