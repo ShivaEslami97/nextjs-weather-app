@@ -10,7 +10,12 @@ export default function App({
 }: AppProps) {
   return (
     <>
-      <ToastContainer autoClose={5000} theme="colored" newestOnTop={true} />
+      <ToastContainer
+        autoClose={5000}
+        theme="colored"
+        position="top-center"
+        newestOnTop={true}
+      />
       <SessionProvider session={session}>
         <Component {...pageProps} />
       </SessionProvider>
