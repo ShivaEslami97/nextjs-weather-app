@@ -11,19 +11,19 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
+    // redirect the user to the "/weather" page when a session is found
     getSession().then((session) => {
       if (session) {
         router.replace("/weather");
       } else {
-        console.log("false");
+        console.log("No session");
       }
     });
-    console.log(status);
   }, [router, status]);
 
   return (
     <>
-      <Layout title="weather App login page" className="w-1/2">
+      <Layout title="weather App login page" className="w-3/4 lg:w-1/2">
         <div className="flex flex-col gap-2 items-center">
           <Image
             className="app-logo"
