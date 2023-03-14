@@ -21,7 +21,7 @@
     @apply bg-main h-screen relative flex items-center bg-cover before:content-[''] before:bg-filter before:absolute before:bg-cover before:h-full before:w-full;
   }
   .main__box {
-    @apply flex flex-col gap-6 mx-auto max-w-[33rem] bg-box shadow py-7 border border-solid border-gray backdrop-blur-4xl px-5 rounded-sm justify-center items-center z-10 text-white relative;
+    @apply flex flex-col gap-6 mx-auto min-h-[16rem] max-w-[33rem] bg-box shadow py-7 border border-solid border-gray backdrop-blur-4xl px-5 rounded-sm items-center z-10 text-white relative;
   }
   .app-logo {
     @apply w-36;
@@ -46,5 +46,11 @@
   }
   .weather__bg {
     @apply absolute right-0 mix-blend-soft-light h-full w-full;
+  }
+  .btn__secondary {
+    @apply text-primary text-base mt-5 p-2 mr-auto border border-primary rounded-sm;
+  }
+  .weather {
+    @apply w-full flex flex-col justify-center items-center relative z-10 text-center;
   }
 }
