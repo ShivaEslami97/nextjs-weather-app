@@ -1,11 +1,11 @@
 import emailIcon from "@/public/email_envelope_mail_send_icon.svg";
 import lockIcon from "@/public/lock_locker_icon.svg";
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useState } from "react";
 import InputContainer from "./InputContainer";
 import { useRouter } from "next/router";
 import { RegisterResponse, User } from "@/models/customTypes";
 import { toast } from "react-toastify";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 
 async function registerUser(userData: User) {
   const response = await fetch("api/auth/signup", {
@@ -26,24 +26,26 @@ async function registerUser(userData: User) {
 }
 
 const AuthForm = () => {
-  const emailInputRef = useRef<HTMLInputElement>(null);
-  const passwordInputRef = useRef<HTMLInputElement>(null);
-  const confirmPassInputRef = useRef<HTMLInputElement>(null);
+  const [enteredEmail, setEnteredEmail] = useState("");
+  const [enteredPassword, setEnteredPassword] = useState("");
+  const [enteredConfirmPassword, setEnteredConfirmPassword] = useState("");
   const [isLogin, setIslogin] = useState<boolean>(true);
   const router = useRouter();
 
+  // Toggles the current authentication mode between login and signup
   const authModeHandler = () => {
     setIslogin((prevIsLogin) => !prevIsLogin);
+    setEnteredEmail("");
+    setEnteredPassword("");
+    setEnteredConfirmPassword("");
   };
 
+  // Handles the form submission
   const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const enteredEmail = emailInputRef.current?.value;
-    const enteredPassword = passwordInputRef.current?.value;
-    const enteredConfirmPassword = confirmPassInputRef.current?.value;
     const userData: User = { enteredEmail, enteredPassword };
 
-    // validation
+    // Form validation
     if (
       enteredEmail?.trim().length === 0 ||
       enteredPassword?.trim().length === 0
@@ -52,33 +54,37 @@ const AuthForm = () => {
       return;
     }
 
-    // user auth
+    // User authentication
     if (!isLogin) {
       if (enteredPassword !== enteredConfirmPassword) {
         toast.error("Passwords does not match");
         return;
       }
       try {
+        // Register a new user
         const response: RegisterResponse = await registerUser(userData);
         toast.success(
           "Registeration was successful! You can login with your info!"
         );
         setIslogin(true);
-        // router.push("/weather");
       } catch (error) {
         let msg = (error as Error).message;
         toast.error(msg);
       }
     } else {
+      // Handel user signIn  after the authentication process.
       const result = await signIn("credentials", {
         redirect: false,
         enteredEmail,
         enteredPassword,
       });
+
+      // If the authentication was successful, redirect the user to weather page.
       if (!result?.error) {
-        // set some auth state
         router.replace("/weather");
       }
+
+      // If the authentication failed, show the error.
       if (result?.error) {
         let msg = result?.error;
         toast.error(msg);
@@ -90,14 +96,16 @@ const AuthForm = () => {
     <form className="auth__form" onSubmit={submitHandler}>
       <InputContainer
         type="email"
-        ref={emailInputRef}
+        value={enteredEmail}
+        onChangedHandler={setEnteredEmail}
         placeholder="Please enter your email ..."
         iconAlt="email icon"
         iconsrc={emailIcon}
       />
       <InputContainer
         type="password"
-        ref={passwordInputRef}
+        value={enteredPassword}
+        onChangedHandler={setEnteredPassword}
         placeholder="Please enter your password"
         iconAlt="lock icon"
         iconsrc={lockIcon}
@@ -105,7 +113,8 @@ const AuthForm = () => {
       {!isLogin && (
         <InputContainer
           type="password"
-          ref={confirmPassInputRef}
+          value={enteredConfirmPassword}
+          onChangedHandler={setEnteredConfirmPassword}
           placeholder="Confirm your password"
           iconAlt="lock icon"
           iconsrc={lockIcon}
