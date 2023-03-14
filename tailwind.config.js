@@ -11,9 +11,12 @@ module.exports = {
         main: "url('../public/clouds-bg.svg')",
         filter: "url(../public/Rectangle.svg)",
         elgoli: "url(../public/elgoli.svg)",
+        tempLow: "url('../public/pexels-lumn.jpg')",
+        tempHigh: "url('../public/white-cloud-blue-sky.jpg')",
       },
       backgroundColor: {
         box: "rgba(255, 255, 255, 0.1)",
+        card: "rgba(29,55,76, .95)",
       },
       colors: {
         primary: "#EDBA4F",
