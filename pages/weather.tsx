@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { WeatherData } from "@/models/customTypes";
 import WeatherResult from "@/components/WeatherResult";
 import { useRouter } from "next/router";
+import Loading from "@/components/Loading/Loading";
 
 const Weather: NextPage = () => {
   const [currentWeather, setCurrentWeather] = useState<WeatherData | null>(
@@ -16,11 +17,13 @@ const Weather: NextPage = () => {
   );
   const [city, setCity] = useState("Tabriz");
   const [tempIsLow, setTempIsLow] = useState(false);
+  const [isLoading, setIsloading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
     const getWeatherData = async () => {
       if (city.trim().length > 0) {
+        setIsloading(true);
         try {
           //Fetch weather data and update the state
           const weather: WeatherData = await fetchData(
@@ -33,6 +36,7 @@ const Weather: NextPage = () => {
             toast.error(error.message || "Something went wrong!");
           }
         }
+        setIsloading(false);
       }
     };
     getWeatherData();
@@ -63,8 +67,11 @@ const Weather: NextPage = () => {
   const cardBg = tempIsLow ? "bg-tempLow" : "bg-tempHigh";
 
   // A default content for when no weather data has been found yet.
-  let weatherResultContent = <p className="py-5">Nothing Found!</p>;
-  if (currentWeather) {
+  let weatherResultContent = <Loading />;
+  if (!isLoading && !currentWeather) {
+    weatherResultContent = <p className="py-5">Nothing Found!</p>;
+  }
+  if (!isLoading && currentWeather) {
     weatherResultContent = <WeatherResult weatherData={currentWeather} />;
   }
 
