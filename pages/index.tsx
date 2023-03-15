@@ -1,13 +1,11 @@
 import AuthForm from "@/components/AuthForm";
 import Layout from "@/components/Layout";
-import Image from "next/image";
-import weatherIcon from "@/public/weather-icon.png";
 import { useEffect } from "react";
 import { getSession, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import WelcomeContent from "@/components/WelcomeContent";
 
 export default function Home() {
-  const { status, data } = useSession();
   const router = useRouter();
 
   useEffect(() => {
@@ -19,20 +17,12 @@ export default function Home() {
         console.log("No session");
       }
     });
-  }, [router, status]);
+  }, [router]);
 
   return (
     <>
       <Layout title="weather App login page" className="w-3/4 lg:w-1/2">
-        <div className="flex flex-col gap-2 items-center">
-          <Image
-            className="app-logo"
-            priority
-            src={weatherIcon}
-            alt="weather icon"
-          />
-          <h3 className="text-2xl">Welcome!</h3>
-        </div>
+        <WelcomeContent />
         <AuthForm />
       </Layout>
     </>
